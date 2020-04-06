@@ -1,0 +1,245 @@
+C51 COMPILER V9.01   MAIN3                                                                 04/03/2020 18:39:26 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN3
+OBJECT MODULE PLACED IN main3.OBJ
+COMPILER INVOKED BY: D:\keil软件\C51\BIN\C51.EXE main3.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "temp-ds1302.h"
+   3          
+   4          #define uchar unsigned char
+   5          #define uint unsigned int
+   6          
+   7          uchar code table1[]={0x81,0xD7,0xC8,0xC2,0x96,0xA2,0xA0,0xC7,0x80,0x82,0xA9};
+   8          uchar num=0;
+   9          /*****************低精度延时函数*********************/
+  10          void delay(unsigned int mstime)
+  11          {
+  12   1              int i,j;
+  13   1              for(i=mstime; i>=0; i--)
+  14   1                      for(j=114; j>=0; j--);
+  15   1      }
+  16          
+  17          
+  18          /***************精确延时50ms函数*********************/
+  19          void Delay50ms()                //@11.0592MHz
+  20          {
+  21   1              unsigned char i, j, k;
+  22   1      
+  23   1              _nop_();
+  24   1              _nop_();
+  25   1              i = 3;
+  26   1              j = 26;
+  27   1              k = 223;
+  28   1              do
+  29   1              {
+  30   2                      do
+  31   2                      {
+  32   3                              while (--k);
+  33   3                      } while (--j);
+  34   2              } while (--i);
+  35   1      }
+  36          
+  37          
+  38          
+  39          /********************74HC164发送Byte数据函数**************/
+  40          void SendByte_74HC164(uchar byte)
+  41          {
+  42   1              uchar num,c;
+  43   1              num=table1[byte];
+  44   1      //      for(c=0; c<8; c++)
+  45   1      //      {
+  46   1      //              DAT=num>>7;             
+  47   1      //              CLK=0;                  // 制造一个上升沿
+  48   1      //              _nop_();                                        
+  49   1      //              CLK=1;
+  50   1      //              num=num<<1;     
+  51   1      //      }
+  52   1              for(c=0; c<8; c++)
+  53   1              {
+  54   2                      DAT=num&0x01;           // P3^0 --> 0000 000x
+  55   2                      CLK=0;                                  // 制造一个上升沿
+C51 COMPILER V9.01   MAIN3                                                                 04/03/2020 18:39:26 PAGE 2   
+
+  56   2                      CLK=1;
+  57   2                      num>>=1;                                // 将数据发送到寄存器
+  58   2              }
+  59   1      }
+  60          
+  61          
+  62          /**************数码管温度数据显示函数******************/
+  63          void Display_Temp(uint temp)                            // 显示程序
+  64          {
+  65   1              uchar disp1,disp2,disp3,disp4;
+  66   1              disp1=temp/1000;                                                        
+  67   1              disp2=(temp%1000)/100;                                          
+  68   1              disp3=(temp%100)/10;                                            
+  69   1              disp4=temp%10;
+  70   1              
+  71   1              DP = 0;                                                                         // 温度小数点开启
+  72   1         
+  73   1              // 控制数码管显示温度
+  74   1      
+  75   1              P1 |= 0x0f;                //消隐
+  76   1              SendByte_74HC164(disp1);
+  77   1              P1 &= 0xf7;                     //1111 0111
+  78   1              delay(6);
+  79   1      
+  80   1              P1 |= 0x0f;               //消隐
+  81   1              SendByte_74HC164(disp2);
+  82   1              P1 &= 0xfb;              //1111 1011
+  83   1              delay(6);
+  84   1              
+  85   1              P1 |= 0x0f;               //消隐
+  86   1              SendByte_74HC164(disp3);
+  87   1              P1 &= 0xfd;              //1111 1101
+  88   1              delay(6);
+  89   1      
+  90   1              P1 |= 0x0f;                //消隐
+  91   1              SendByte_74HC164(disp4);
+  92   1              P1 &= 0xfE;                //1111 1110 
+  93   1              delay(6);
+  94   1              
+  95   1              P1 |= 0x0f;
+  96   1      }
+  97          
+  98          
+  99          /******************显示时间*******************/
+ 100          void Display_Time()                                                     // 显示程序
+ 101          {
+ 102   1              uchar disp0,disp1,disp2,disp3,disp4,disp5,disp6,disp7,disp8,disp9;
+ 103   1              disp0 = (time[0])/16;                           
+ 104   1              disp1 = (time[0])%16;                           
+ 105   1              disp2 = (time[1])/16;                           
+ 106   1              disp3 = (time[1])%16;                           
+ 107   1              disp4 = (time[2])/16;                           
+ 108   1              disp5 = (time[2])%16;                           
+ 109   1              disp6 = (time[3])/16;                           
+ 110   1              disp7 = (time[3])%16;                           
+ 111   1              disp8 = (time[4])/16;                           
+ 112   1              disp9 = (time[4])%16;                           
+ 113   1              
+ 114   1      
+ 115   1      //      flag ++;                                                                                        // 时间点闪烁计数
+ 116   1      //      if(flag >= 132)
+ 117   1      //      {
+C51 COMPILER V9.01   MAIN3                                                                 04/03/2020 18:39:26 PAGE 3   
+
+ 118   1      //              DP = ~DP;
+ 119   1      //              flag = 0;
+ 120   1      //      }
+ 121   1      
+ 122   1         
+ 123   1              // 控制数码管显示时间
+ 124   1              P1 |= 0x0f;
+ 125   1              SendByte_74HC164(disp4);                                
+ 126   1              P1 &= 0xf7;
+ 127   1              delay(6);
+ 128   1      
+ 129   1              P1 |= 0x0f;
+ 130   1              SendByte_74HC164(disp5);                                
+ 131   1              P1 &= 0xfB;
+ 132   1              delay(6);
+ 133   1      
+ 134   1              P1 |= 0x0f;                                                     
+ 135   1              SendByte_74HC164(disp2);                                
+ 136   1              P1 &= 0xfd;
+ 137   1              delay(6);
+ 138   1              
+ 139   1              P1 |= 0x0f;
+ 140   1              SendByte_74HC164(disp3);                                
+ 141   1              P1 &= 0xfe;
+ 142   1              delay(6);
+ 143   1      
+ 144   1              P1 |= 0x0f;
+ 145   1      }
+ 146          
+ 147          /*************定时器初始化****************/
+ 148          void Timer0()
+ 149          {
+ 150   1              
+ 151   1              TMOD |= 0x01;            //定时器0   方式1   16位重装
+ 152   1              TH0=0x4c;
+ 153   1              TL0=0x00;
+ 154   1              EA=1;
+ 155   1              ET0=1;
+ 156   1              TR0=1;
+ 157   1      }
+ 158          
+ 159          /**************中断初始化*****************/
+ 160          void configExtInt0()
+ 161          {
+ 162   1              IT0 = 1;        //选择为下降沿触发方式(为1代表下降沿触发，为0代表低电平触发)
+ 163   1              EX0 = 1;        //使能外部中断0
+ 164   1              EA = 1;         //使能总中断
+ 165   1      }
+ 166          
+ 167          /***************外部中断*****************/
+ 168          void extInt0() interrupt 0
+ 169          {
+ 170   1              EA = 0;                                                 // 关闭总中断
+ 171   1              Delay50ms();                            // 延时消抖
+ 172   1              if(KEY == 0)
+ 173   1              {
+ 174   2                      P1 |= 0x0f;                                 // 关闭位选,清屏
+ 175   2                      DISP_FLAG = ~DISP_FLAG;         // 显示其他功能
+ 176   2              }
+ 177   1              EA = 1;                                                 // 开启总中断
+ 178   1      }
+ 179          
+C51 COMPILER V9.01   MAIN3                                                                 04/03/2020 18:39:26 PAGE 4   
+
+ 180          /****************主函数*******************/
+ 181          void main()
+ 182          {
+ 183   1              uchar a;
+ 184   1              Timer0();
+ 185   1              configExtInt0();                                                                        // 配置外部中断0
+ 186   1      //      DS1302Init();                                                                           // DS1302日期初始化
+ 187   1              while(1)
+ 188   1              {
+ 189   2                      if(DISP_FLAG == 1)                                                      // 时间显示
+ 190   2                      {
+ 191   3                              DS1302ReadTime();                                               // DS1302读取当前时间
+ 192   3      
+ 193   3                              Display_Time();                                                         // 显示当前时间
+ 194   3                      }
+ 195   2                      else                                                                                                            // 温度显示
+ 196   2                      {
+ 197   3                                      DS18b20ChangTemp();                                     // 温度转换
+ 198   3                                      for(a=40;a>0;a--)                                               // 延时,保持连续显示
+ 199   3                                      {
+ 200   4                                              Display_Temp(tmp());                            // 进行温度转换和数值显示
+ 201   4                                      }
+ 202   3                      }
+ 203   2              }
+ 204   1      }
+ 205          
+ 206          void Timert0() interrupt 1
+ 207          { 
+ 208   1              TH0=0x4c;
+ 209   1              TL0=0x00;
+ 210   1              num++;                  //50ms计数
+ 211   1              if(num==10)             //计数20次 1s
+ 212   1              {
+ 213   2                      num=0;
+ 214   2                      DP = ~DP;
+ 215   2              }
+ 216   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    464    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

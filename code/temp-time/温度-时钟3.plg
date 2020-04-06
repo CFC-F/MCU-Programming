@@ -1,0 +1,114 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\cfc\Desktop\Github-code\µ¥Æ¬»ú\code\ÐÂ½¨ÎÄ¼þ¼Ð\ÎÂ¶È-Ê±ÖÓ3.uvproj
+Project File Date:  12/04/2019
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main3.c...
+main3.c(1): error C318: can't open file 'main3.c'
+compiling Ê±ÖÓ3.c...
+Ê±ÖÓ3.c(1): error C318: can't open file 'Ê±ÖÓ3.c'
+compiling ÎÂ¶È3.c...
+ÎÂ¶È3.c(1): error C318: can't open file 'ÎÂ¶È3.c'
+Target not created
+Build target 'Target 1'
+compiling main3.c...
+main3.c(2): warning C318: can't open file 'temp-ds1302.h'
+MAIN3.C(23): warning C206: '_nop_': missing function-prototype
+MAIN3.C(23): error C264: intrinsic '_nop_': declaration/activation error
+MAIN3.C(54): error C202: 'DAT': undefined identifier
+MAIN3.C(55): error C202: 'CLK': undefined identifier
+MAIN3.C(56): error C202: 'CLK': undefined identifier
+MAIN3.C(71): error C202: 'DP': undefined identifier
+MAIN3.C(103): error C202: 'time': undefined identifier
+MAIN3.C(104): error C202: 'time': undefined identifier
+MAIN3.C(105): error C202: 'time': undefined identifier
+MAIN3.C(106): error C202: 'time': undefined identifier
+MAIN3.C(107): error C202: 'time': undefined identifier
+MAIN3.C(108): error C202: 'time': undefined identifier
+MAIN3.C(109): error C202: 'time': undefined identifier
+MAIN3.C(110): error C202: 'time': undefined identifier
+MAIN3.C(111): error C202: 'time': undefined identifier
+MAIN3.C(112): error C202: 'time': undefined identifier
+MAIN3.C(172): error C202: 'KEY': undefined identifier
+MAIN3.C(175): error C202: 'DISP_FLAG': undefined identifier
+MAIN3.C(189): error C202: 'DISP_FLAG': undefined identifier
+compiling Ê±ÖÓ3.c...
+Ê±ÖÓ3.c(2): warning C318: can't open file 'temp-ds1302.h'
+Ê±ÖÓ3.C(4): error C129: missing ';' before 'code'
+compiling ÎÂ¶È3.c...
+ÎÂ¶È3.c(2): warning C318: can't open file 'temp-ds1302.h'
+ÎÂ¶È3.C(4): error C129: missing ';' before 'flag'
+Target not created
+Build target 'Target 1'
+compiling main3.c...
+main3.c(2): warning C318: can't open file 'temp-ds1302.h'
+MAIN3.C(23): warning C206: '_nop_': missing function-prototype
+MAIN3.C(23): error C264: intrinsic '_nop_': declaration/activation error
+MAIN3.C(54): error C202: 'DAT': undefined identifier
+MAIN3.C(55): error C202: 'CLK': undefined identifier
+MAIN3.C(56): error C202: 'CLK': undefined identifier
+MAIN3.C(71): error C202: 'DP': undefined identifier
+MAIN3.C(103): error C202: 'time': undefined identifier
+MAIN3.C(104): error C202: 'time': undefined identifier
+MAIN3.C(105): error C202: 'time': undefined identifier
+MAIN3.C(106): error C202: 'time': undefined identifier
+MAIN3.C(107): error C202: 'time': undefined identifier
+MAIN3.C(108): error C202: 'time': undefined identifier
+MAIN3.C(109): error C202: 'time': undefined identifier
+MAIN3.C(110): error C202: 'time': undefined identifier
+MAIN3.C(111): error C202: 'time': undefined identifier
+MAIN3.C(112): error C202: 'time': undefined identifier
+MAIN3.C(172): error C202: 'KEY': undefined identifier
+MAIN3.C(175): error C202: 'DISP_FLAG': undefined identifier
+MAIN3.C(189): error C202: 'DISP_FLAG': undefined identifier
+compiling Ê±ÖÓ3.c...
+Ê±ÖÓ3.c(2): warning C318: can't open file 'temp-ds1302.h'
+Ê±ÖÓ3.C(4): error C129: missing ';' before 'code'
+compiling ÎÂ¶È3.c...
+ÎÂ¶È3.c(2): warning C318: can't open file 'temp-ds1302.h'
+ÎÂ¶È3.C(4): error C129: missing ';' before 'flag'
+Target not created
+Build target 'Target 1'
+compiling main3.c...
+main3.c(2): warning C318: can't open file 'temp-ds1302.h'
+MAIN3.C(23): warning C206: '_nop_': missing function-prototype
+MAIN3.C(23): error C264: intrinsic '_nop_': declaration/activation error
+MAIN3.C(54): error C202: 'DAT': undefined identifier
+MAIN3.C(55): error C202: 'CLK': undefined identifier
+MAIN3.C(56): error C202: 'CLK': undefined identifier
+MAIN3.C(71): error C202: 'DP': undefined identifier
+MAIN3.C(103): error C202: 'time': undefined identifier
+MAIN3.C(104): error C202: 'time': undefined identifier
+MAIN3.C(105): error C202: 'time': undefined identifier
+MAIN3.C(106): error C202: 'time': undefined identifier
+MAIN3.C(107): error C202: 'time': undefined identifier
+MAIN3.C(108): error C202: 'time': undefined identifier
+MAIN3.C(109): error C202: 'time': undefined identifier
+MAIN3.C(110): error C202: 'time': undefined identifier
+MAIN3.C(111): error C202: 'time': undefined identifier
+MAIN3.C(112): error C202: 'time': undefined identifier
+MAIN3.C(172): error C202: 'KEY': undefined identifier
+MAIN3.C(175): error C202: 'DISP_FLAG': undefined identifier
+MAIN3.C(189): error C202: 'DISP_FLAG': undefined identifier
+compiling Ê±ÖÓ3.c...
+Ê±ÖÓ3.c(2): warning C318: can't open file 'temp-ds1302.h'
+Ê±ÖÓ3.C(4): error C129: missing ';' before 'code'
+compiling ÎÂ¶È3.c...
+ÎÂ¶È3.c(2): warning C318: can't open file 'temp-ds1302.h'
+ÎÂ¶È3.C(4): error C129: missing ';' before 'flag'
+Target not created
+Build target 'Target 1'
+compiling main3.c...
+compiling Ê±ÖÓ3.c...
+compiling ÎÂ¶È3.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DS1302INIT?Ê±_Ó3
+Program Size: data=31.1 xdata=0 code=2015
+creating hex file from "ÎÂ¶È-Ê±ÖÓ3"...
+"ÎÂ¶È-Ê±ÖÓ3" - 0 Error(s), 1 Warning(s).
